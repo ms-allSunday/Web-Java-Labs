@@ -4,6 +4,7 @@ import com.example.spacecatsmarket.domain.Product;
 import com.example.spacecatsmarket.dto.product.ProductDto;
 import com.example.spacecatsmarket.dto.product.ProductRequestDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
@@ -17,5 +18,7 @@ public interface ProductMapper {
     Product toProductEntity(ProductDto dto);
 
     List<ProductDto> toProductList(List<Product> products);
+
+    void updateFromDto(ProductRequestDto request, @MappingTarget Product entity);
 }
 

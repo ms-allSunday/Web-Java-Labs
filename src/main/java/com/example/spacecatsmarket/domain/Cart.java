@@ -5,9 +5,9 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Value
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cart {
-    private List<Product> products = new ArrayList<>();
+    List<Product> products = new ArrayList<>();
 }

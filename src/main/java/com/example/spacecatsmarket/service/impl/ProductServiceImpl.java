@@ -49,10 +49,7 @@ public class ProductServiceImpl implements ProductService {
             throw new NoSuchElementException("Product not found with id: " + id);
         }
 
-        existing.setName(requestDto.getName());
-        existing.setDescription(requestDto.getDescription());
-        existing.setPrice(requestDto.getPrice());
-        existing.setInStock(requestDto.getInStock());
+        productMapper.updateFromDto(requestDto, existing);
 
         mockDb.put(id, existing);
         return productMapper.toProductDto(existing);

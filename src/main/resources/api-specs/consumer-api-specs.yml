@@ -6,7 +6,7 @@ info:
 servers:
   - url: http://localhost:8080
 paths:
-  /api/products:
+  /api/v1/products:
     get:
       summary: Get all products
       responses:
@@ -35,7 +35,7 @@ paths:
                 $ref: '#/components/schemas/ProductDto'
         '400':
           description: Validation error
-  /api/products/{id}:
+  /api/v1/products/{id}:
     get:
       summary: Get a product by ID
       parameters:
@@ -89,8 +89,6 @@ paths:
       responses:
         '204':
           description: Product deleted
-        '404':
-          description: Product not found
 components:
   schemas:
     ProductDto:

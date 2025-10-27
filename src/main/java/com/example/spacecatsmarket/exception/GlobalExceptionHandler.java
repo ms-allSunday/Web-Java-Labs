@@ -18,7 +18,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, Object>> handleValidationExceptions(
+    public ResponseEntity<ProblemDetail> handleValidationExceptions(
             MethodArgumentNotValidException ex, HttpServletRequest request) {
 
         Map<String, String> fieldErrors = new HashMap<>();
@@ -30,26 +30,29 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleProductNotFound(
+    public ResponseEntity<ProblemDetail> handleProductNotFound(
             ProductNotFoundException ex, HttpServletRequest request) {
 
         return buildResponse(HttpStatus.NOT_FOUND, "Not Found", ex.getMessage(), request.getRequestURI());
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, Object>> handleAllExceptions(
+    public ResponseEntity<ProblemDetail> handleAllExceptions(
             Exception ex, HttpServletRequest request) {
 
         return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error", ex.getMessage(), request.getRequestURI());
     }
 
-    private ResponseEntity<Map<String, Object>> buildResponse(HttpStatus status, String error, Object message, String path) {
-        Map<String, Object> response = new HashMap<>();
-        response.put("timestamp", Instant.now());
-        response.put("status", status.value());
-        response.put("error", error);
-        response.put("message", message);
-        response.put("path", path);
-        return new ResponseEntity<>(response, status);
+    private ResponseEntity<ProblemDetail> buildResponse(HttpStatus status, String error, Object message, String path) {
+        ProblemDetail problemDetail = ProblemDetail.forStatus(status);
+        problemDetail.setProperty("timestamp", Instant.now());
+        problemDetail.setProperty("status", status.value());
+        problemDetail.setProperty("error", error);
+        problemDetail.setProperty("message", message);
+        problemDetail.setProperty("path", path);
+
+        return ResponseEntity.status(status)
+                .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+                .body(problemDetail);
     }
 }
