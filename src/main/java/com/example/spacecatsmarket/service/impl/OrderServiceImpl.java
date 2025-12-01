@@ -31,6 +31,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public Order createOrder(Order order) {
+
+        order.setOrderNumber(java.util.UUID.randomUUID());
+        
         if (order.getOrderDate() == null) {
             order.setOrderDate(java.time.LocalDateTime.now());
         }
