@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
     public Order createOrder(Order order) {
 
         order.setOrderNumber(java.util.UUID.randomUUID());
-        
+
         if (order.getOrderDate() == null) {
             order.setOrderDate(java.time.LocalDateTime.now());
         }
