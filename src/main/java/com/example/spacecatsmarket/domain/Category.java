@@ -18,6 +18,7 @@ public class Category {
 
     private String name;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany
+    @JoinColumn(name = "category_id")
     private List<Product> products;
 }
