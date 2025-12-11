@@ -1,5 +1,6 @@
 package com.example.spacecatsmarket.web;
 
+import com.example.spacecatsmarket.AbstractIT;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @DisplayName("Authentication Integration Tests")
-class AuthenticationIT {
+class AuthenticationIT extends AbstractIT {
 
     @Autowired
     private MockMvc mockMvc;
