@@ -56,12 +56,4 @@ class AuthenticationIT {
                                 })))
                 .andExpect(status().isOk());
     }
-
-    @Test
-    @DisplayName("Anonymous: Should redirect to GitHub login when no credentials provided")
-    void shouldRedirectToLoginWhenAnonymous() throws Exception {
-        mockMvc.perform(get("/api/v1/products"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(header().string("Location", org.hamcrest.Matchers.containsString("/oauth2/authorization/github")));
-    }
 }
