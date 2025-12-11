@@ -57,4 +57,9 @@ dependencies {
     implementation 'org.postgresql:postgresql:42.7.4'
     testImplementation 'org.testcontainers:junit-jupiter:1.19.7'
     testImplementation 'org.testcontainers:postgresql:1.19.7'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.wiremock:wiremock-standalone:3.3.1'
 }
